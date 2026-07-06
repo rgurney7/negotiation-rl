@@ -1,0 +1,30 @@
+[project]
+name = "negotiation-rl"
+version = "0.1.0"
+description = "A controlled SFT vs GRPO vs PPO comparison on CraigslistBargains, trained as identically as the algorithms allow."
+requires-python = ">=3.11"
+dependencies = [
+    "torch",
+    "transformers",
+    "datasets",
+    "peft",
+    "safetensors",
+    "numpy",
+    "unsloth",               # fast LoRA training
+    "openai",                # grade buyer
+    "google-genai",          # train buyer
+    "python-dotenv",
+    "huggingface_hub",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+# Qwen3.5 GatedDeltaNet fast path; install with --no-build-isolation (CUDA only). See requirements.lock.
+perf = ["causal-conv1d", "flash-linear-attention"]
+
+[tool.setuptools]
+packages = ["shared", "ppo", "grpo", "sft"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"

@@ -1,0 +1,22 @@
+# secrets — NEVER commit
+.env
+
+# run artifacts (checkpoints, logs) — mirrored to HF Hub instead
+runs/
+/workspace/
+
+# reward-judge cache (derived; regenerated on demand)
+data/judge_cache.jsonl
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.venv-explore/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# os
+.DS_Store

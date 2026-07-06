@@ -1,0 +1,55 @@
+# Dependency lock for negotiation-rl.
+# Source of truth: the 2026-06-29 RunPod A40 preview that ran SFT, GRPO, and PPO end-to-end
+# (Python 3.12, CUDA 12.9). The unpinned pyproject.toml resolves to mutually-incompatible
+# bleeding edge — PIN. The load-bearing packages below are the exact versions that WORKED.
+#
+# Install:  pip install --no-build-isolation -r requirements.lock --break-system-packages
+#           (or via uv:  uv pip install --break-system-packages -r requirements.lock)
+#
+# ── VERIFIED STACK — torch 2.9.1 — reproduces SFT + GRPO + PPO ─────────────────────────
+# These five are the tight-coupling set; force them exactly. transformers 5.12+ breaks
+# unsloth (auto_docstring); 5.5.0 is unsloth 2026.6.9's documented cap. xformers 0.0.33.post2
+# is the torch-2.9 build. torch 2.9.x is required (torch.int1; older torch fails to import
+# transformers). Base image used: runpod/pytorch:1.0.7-cu1290-torch291-ubuntu2404.
+torch==2.9.1
+unsloth==2026.6.9
+unsloth-zoo==2026.6.7
+transformers==5.5.0
+xformers==0.0.33.post2
+peft==0.19.1
+# supporting (versions observed in the verified run; loosen only if needed)
+trl==0.24.0
+tokenizers==0.22.2
+bitsandbytes==0.49.2
+pyarrow==24.0.0
+accelerate
+datasets
+safetensors
+sentencepiece
+huggingface_hub
+hf-transfer
+numpy
+# API opponents + env — the two API SDKs are PINNED to the locally-verified versions: the HTTP
+# timeout fix (buyer/judge http_options + OpenAI timeout kwarg) was traced against exactly these
+# builds (genai HttpOptions.timeout is MILLISECONDS -> httpx seconds; OpenAI max_retries=2), and an
+# unpinned pod deploy would resolve whatever PyPI has that day.
+openai==2.44.0
+google-genai==2.10.0
+python-dotenv
+#
+# ── PERF: Qwen3.5 linear-attention fast kernels (BOX-VERIFY versions) ──────────────────
+# Qwen3.5-4B's hybrid GatedDeltaNet layers fall back to slow torch ops WITHOUT these two CUDA
+# kernels — the preview logs showed "fast path is not available ... falling back to torch
+# implementation" on every run. They need --no-build-isolation (already in the install cmd above).
+# Versions left UNPINNED until the pilot box-verifies import + a 3-update A/B confirms the speedup
+# against torch 2.9.1 (a kernel can install yet still mismatch torch and silently fall back). After
+# that A/B, pin the exact working versions here and set require_fast_kernels=True for the final run.
+causal-conv1d            # imports as `causal_conv1d`
+flash-linear-attention   # imports as `fla`
+#
+# ── vLLM: intentionally NOT used ──────────────────────────────────────────────────────
+# PPO rolls out with batched HF `.generate`, not vLLM. This is a deliberate simplification
+# (2026-06-29): it keeps all three methods on the single verified torch-2.9.1 stack above
+# (vLLM 0.23 would force the whole stack to torch 2.10), gives one generation path to reason
+# about, drops the LoRA->vLLM weight-sync staleness risk, and matches the reference repo,
+# which also used plain HF generation. Do NOT re-add vLLM without re-opening that trade.

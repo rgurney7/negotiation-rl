@@ -1,0 +1,2320 @@
+{
+  "hf_repo": "stanfordnlp/craigslist_bargains",
+  "hf_revision": "cfb6992c5ca9bad209323ed8e42e0cfc7e4178cf",
+  "model": "gemini-3.1-flash-lite-preview",
+  "temperature": 0,
+  "gate": {
+    "ratio_band": [
+      0.5,
+      1.5
+    ],
+    "price_band": [
+      0.1,
+      1.5
+    ],
+    "min_contentful_turns": 4,
+    "min_seller_priced": 2,
+    "min_buyer_priced": 1
+  },
+  "counts": {
+    "train_dialogues": 5138,
+    "golden": 1385,
+    "missing_llm": 0,
+    "leak": 1,
+    "concession": 531,
+    "passb_no_deal": 26,
+    "close_unreliable": 7,
+    "orphan": 3,
+    "kept": 817,
+    "close_fallback": 3,
+    "sft_opener_dropped": 362,
+    "sft_pairs": 3198,
+    "grpo_examples": 817,
+    "ppo_examples": 817,
+    "val_scenarios": 401,
+    "test_scenarios": 506,
+    "val50": 50
+  },
+  "output_sha256": {
+    "enriched_train.jsonl": "e6b1a2ed83ec84e2",
+    "eval_pool.jsonl": "a643ac4325c0cf07",
+    "slices/sft.jsonl": "78aecd2be655c2a0",
+    "slices/grpo.jsonl": "e987b83125fc9757",
+    "slices/ppo.jsonl": "efd78d95bf2c0406",
+    "slices/val50.jsonl": "82608059d33ec2df"
+  },
+  "dropped_ids": [
+    {
+      "did": "499812ed3790d865",
+      "reason": "concession"
+    },
+    {
+      "did": "aa588f2ea0c48e57",
+      "reason": "concession"
+    },
+    {
+      "did": "d41205dec9114e7e",
+      "reason": "concession"
+    },
+    {
+      "did": "447c3e556a55a555",
+      "reason": "concession"
+    },
+    {
+      "did": "762116d5abef2a3d",
+      "reason": "concession"
+    },
+    {
+      "did": "535632619b412e90",
+      "reason": "concession"
+    },
+    {
+      "did": "67d8579ae6a27a22",
+      "reason": "concession"
+    },
+    {
+      "did": "81d9972f0e8d8cb1",
+      "reason": "concession"
+    },
+    {
+      "did": "dd9041dc50cd450c",
+      "reason": "concession"
+    },
+    {
+      "did": "f2cf874c49000e28",
+      "reason": "concession"
+    },
+    {
+      "did": "fe8727320ccee112",
+      "reason": "concession"
+    },
+    {
+      "did": "f7b5b029d634f9f1",
+      "reason": "concession"
+    },
+    {
+      "did": "64fa243e7c3e357a",
+      "reason": "concession"
+    },
+    {
+      "did": "64d33a9cbd22a8dd",
+      "reason": "concession"
+    },
+    {
+      "did": "b888ace868a8b051",
+      "reason": "concession"
+    },
+    {
+      "did": "bc792111ca64d771",
+      "reason": "concession"
+    },
+    {
+      "did": "bc74fa72ece13064",
+      "reason": "concession"
+    },
+    {
+      "did": "ebfc62605bc0d3f8",
+      "reason": "concession"
+    },
+    {
+      "did": "c75962399eb267fd",
+      "reason": "concession"
+    },
+    {
+      "did": "d9032b51b405ae88",
+      "reason": "concession"
+    },
+    {
+      "did": "f05e78160c00112d",
+      "reason": "concession"
+    },
+    {
+      "did": "85f322d2cb1a56d0",
+      "reason": "concession"
+    },
+    {
+      "did": "5c6b08ab57341be4",
+      "reason": "concession"
+    },
+    {
+      "did": "a1a2b158a062c151",
+      "reason": "concession"
+    },
+    {
+      "did": "7037c69074ef9154",
+      "reason": "concession"
+    },
+    {
+      "did": "2853633347f5292a",
+      "reason": "concession"
+    },
+    {
+      "did": "7bfdbef6572f8a2b",
+      "reason": "concession"
+    },
+    {
+      "did": "3a80e5063ec1cd5a",
+      "reason": "concession"
+    },
+    {
+      "did": "5e0b9aa28201b068",
+      "reason": "concession"
+    },
+    {
+      "did": "613dfaa66a0d7b96",
+      "reason": "concession"
+    },
+    {
+      "did": "e731b9f868c9e496",
+      "reason": "concession"
+    },
+    {
+      "did": "c01de8c3fe7740cd",
+      "reason": "concession"
+    },
+    {
+      "did": "dc6c61766580dbee",
+      "reason": "concession"
+    },
+    {
+      "did": "ffd9aa087b6b542b",
+      "reason": "concession"
+    },
+    {
+      "did": "dd932933c3ed982d",
+      "reason": "concession"
+    },
+    {
+      "did": "5717529a52067071",
+      "reason": "orphan"
+    },
+    {
+      "did": "07a4ffb800093458",
+      "reason": "concession"
+    },
+    {
+      "did": "d6105f16c6c5e77a",
+      "reason": "concession"
+    },
+    {
+      "did": "808bdd30cb370927",
+      "reason": "concession"
+    },
+    {
+      "did": "c6c11338f1976db3",
+      "reason": "concession"
+    },
+    {
+      "did": "c8c9bee121052629",
+      "reason": "concession"
+    },
+    {
+      "did": "0f8595c37583cab4",
+      "reason": "concession"
+    },
+    {
+      "did": "993aa5e84f77ea58",
+      "reason": "concession"
+    },
+    {
+      "did": "73b1fd485ee4466e",
+      "reason": "concession"
+    },
+    {
+      "did": "2c1a376225c137cc",
+      "reason": "concession"
+    },
+    {
+      "did": "239ae93e128113bb",
+      "reason": "concession"
+    },
+    {
+      "did": "d6922a28efb015e8",
+      "reason": "concession"
+    },
+    {
+      "did": "24a8814510e58517",
+      "reason": "concession"
+    },
+    {
+      "did": "caf3f9faed36c993",
+      "reason": "concession"
+    },
+    {
+      "did": "cab67a2a74753242",
+      "reason": "concession"
+    },
+    {
+      "did": "ec302e81ac2b9960",
+      "reason": "concession"
+    },
+    {
+      "did": "7e9fb0413315e2bd",
+      "reason": "concession"
+    },
+    {
+      "did": "46492be6e093e4b5",
+      "reason": "concession"
+    },
+    {
+      "did": "98a1754f6c7001ad",
+      "reason": "concession"
+    },
+    {
+      "did": "d62b4a945bf438b4",
+      "reason": "concession"
+    },
+    {
+      "did": "a1c1d20f28eea569",
+      "reason": "concession"
+    },
+    {
+      "did": "88da6b7ec095cbbc",
+      "reason": "concession"
+    },
+    {
+      "did": "e40b27e98251fddf",
+      "reason": "concession"
+    },
+    {
+      "did": "9ea1f7dc12d1ad03",
+      "reason": "concession"
+    },
+    {
+      "did": "5116e7bce826dbfa",
+      "reason": "concession"
+    },
+    {
+      "did": "8b6033bcd51fa2bc",
+      "reason": "concession"
+    },
+    {
+      "did": "ed247b89a3dc1295",
+      "reason": "concession"
+    },
+    {
+      "did": "00a8fa0510d57195",
+      "reason": "concession"
+    },
+    {
+      "did": "ed7c626591f9a470",
+      "reason": "concession"
+    },
+    {
+      "did": "d9f327395bab9b3a",
+      "reason": "concession"
+    },
+    {
+      "did": "bfc25d847c14df83",
+      "reason": "concession"
+    },
+    {
+      "did": "9dc81d32a1c47d17",
+      "reason": "concession"
+    },
+    {
+      "did": "7758b5e40b3b9648",
+      "reason": "orphan"
+    },
+    {
+      "did": "89247659f86da081",
+      "reason": "concession"
+    },
+    {
+      "did": "bb33cdc5a134fab9",
+      "reason": "concession"
+    },
+    {
+      "did": "ba34a6f0d939c8cf",
+      "reason": "concession"
+    },
+    {
+      "did": "c38702f6e8a04e84",
+      "reason": "concession"
+    },
+    {
+      "did": "1045353ef71c8c4c",
+      "reason": "concession"
+    },
+    {
+      "did": "94730328f5bb090e",
+      "reason": "concession"
+    },
+    {
+      "did": "40512ab7419fed07",
+      "reason": "concession"
+    },
+    {
+      "did": "0934194325cca5ea",
+      "reason": "concession"
+    },
+    {
+      "did": "9e65bc135dd56a89",
+      "reason": "concession"
+    },
+    {
+      "did": "c6596f4de6f7d46a",
+      "reason": "concession"
+    },
+    {
+      "did": "5edae61556cce5df",
+      "reason": "concession"
+    },
+    {
+      "did": "5523cc29c9b07659",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "1c0f4e81555ee3f1",
+      "reason": "concession"
+    },
+    {
+      "did": "9f820943954612c4",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "cd51b2beb7ac25c3",
+      "reason": "concession"
+    },
+    {
+      "did": "0bd2f514b7580c6e",
+      "reason": "concession"
+    },
+    {
+      "did": "9fd179133d0777cd",
+      "reason": "concession"
+    },
+    {
+      "did": "e92448a1d8cbc272",
+      "reason": "concession"
+    },
+    {
+      "did": "92329fa0582461f5",
+      "reason": "concession"
+    },
+    {
+      "did": "83bedd9b96d71261",
+      "reason": "concession"
+    },
+    {
+      "did": "0306add20311c49d",
+      "reason": "concession"
+    },
+    {
+      "did": "cc56a7db980a3001",
+      "reason": "concession"
+    },
+    {
+      "did": "cdcf8abfc34e2d51",
+      "reason": "concession"
+    },
+    {
+      "did": "4ac05ba7f77e5f38",
+      "reason": "concession"
+    },
+    {
+      "did": "25a7a07403ec2c1b",
+      "reason": "concession"
+    },
+    {
+      "did": "2c26d3a02781dfc9",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "3dae5b0557a9543e",
+      "reason": "concession"
+    },
+    {
+      "did": "89fb3cd09c6e8276",
+      "reason": "concession"
+    },
+    {
+      "did": "90384df02714dea7",
+      "reason": "concession"
+    },
+    {
+      "did": "8a70d9070e5457ab",
+      "reason": "concession"
+    },
+    {
+      "did": "ce9536681043cc06",
+      "reason": "concession"
+    },
+    {
+      "did": "f2c93195c3da698a",
+      "reason": "concession"
+    },
+    {
+      "did": "97458931b0d8cd6e",
+      "reason": "concession"
+    },
+    {
+      "did": "5d6746c9f6eee3df",
+      "reason": "concession"
+    },
+    {
+      "did": "2ed49ea0eadacc82",
+      "reason": "concession"
+    },
+    {
+      "did": "836bdd3e3c1c3b86",
+      "reason": "concession"
+    },
+    {
+      "did": "2954ab34ec346ce9",
+      "reason": "concession"
+    },
+    {
+      "did": "59cb44cef0221a8d",
+      "reason": "concession"
+    },
+    {
+      "did": "12458d9f85abe8b8",
+      "reason": "concession"
+    },
+    {
+      "did": "55523b613823b0b1",
+      "reason": "concession"
+    },
+    {
+      "did": "11bf4a226bb6adfc",
+      "reason": "concession"
+    },
+    {
+      "did": "9919f1aafc53ad4b",
+      "reason": "concession"
+    },
+    {
+      "did": "85e3d61f290b5ec0",
+      "reason": "concession"
+    },
+    {
+      "did": "fb910d34e2d34f51",
+      "reason": "concession"
+    },
+    {
+      "did": "b69f0c372c385fd9",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "d7cd0232a76b0839",
+      "reason": "concession"
+    },
+    {
+      "did": "c6fe1597379f6a1c",
+      "reason": "concession"
+    },
+    {
+      "did": "bb3571c2ec7174f9",
+      "reason": "concession"
+    },
+    {
+      "did": "6136bd60cbd69d3b",
+      "reason": "concession"
+    },
+    {
+      "did": "75ade0f6256e8399",
+      "reason": "concession"
+    },
+    {
+      "did": "0edebc7d9cc1e47f",
+      "reason": "concession"
+    },
+    {
+      "did": "871fb55c6aaf67ce",
+      "reason": "concession"
+    },
+    {
+      "did": "242ec580a5be51d5",
+      "reason": "concession"
+    },
+    {
+      "did": "866eb10e5efe3c50",
+      "reason": "concession"
+    },
+    {
+      "did": "94a04ceb158a392c",
+      "reason": "concession"
+    },
+    {
+      "did": "4b2e0d1c6df56fab",
+      "reason": "concession"
+    },
+    {
+      "did": "e3ecf74448244d44",
+      "reason": "concession"
+    },
+    {
+      "did": "f9940853e8c29810",
+      "reason": "concession"
+    },
+    {
+      "did": "a53c8e135d348ad9",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "82ee11d32188d26e",
+      "reason": "concession"
+    },
+    {
+      "did": "45e17d40e7c2ab56",
+      "reason": "concession"
+    },
+    {
+      "did": "b9c5efaec5a5a969",
+      "reason": "concession"
+    },
+    {
+      "did": "1205e07317874902",
+      "reason": "concession"
+    },
+    {
+      "did": "e12b864477354981",
+      "reason": "concession"
+    },
+    {
+      "did": "6123b148240a4318",
+      "reason": "concession"
+    },
+    {
+      "did": "41f7007715038a70",
+      "reason": "concession"
+    },
+    {
+      "did": "71b6163a0a9bc907",
+      "reason": "concession"
+    },
+    {
+      "did": "c56f12fb2c9b73ab",
+      "reason": "concession"
+    },
+    {
+      "did": "230a6a76b66666c7",
+      "reason": "concession"
+    },
+    {
+      "did": "27c5d3fac1cf03b5",
+      "reason": "concession"
+    },
+    {
+      "did": "cda025feb7166f1b",
+      "reason": "concession"
+    },
+    {
+      "did": "9e83ac725902efea",
+      "reason": "close_unreliable"
+    },
+    {
+      "did": "dca221e4650ac2ff",
+      "reason": "concession"
+    },
+    {
+      "did": "40e77421d8b54bc2",
+      "reason": "concession"
+    },
+    {
+      "did": "e0d1e26935488a87",
+      "reason": "concession"
+    },
+    {
+      "did": "d3bc0f06c1dadf1c",
+      "reason": "concession"
+    },
+    {
+      "did": "c76bf8a5ab933987",
+      "reason": "concession"
+    },
+    {
+      "did": "03dad3d99ed80fee",
+      "reason": "concession"
+    },
+    {
+      "did": "948fdb8a1ee60f6e",
+      "reason": "concession"
+    },
+    {
+      "did": "53490bdd5a6715b3",
+      "reason": "concession"
+    },
+    {
+      "did": "809fe671d7b38c68",
+      "reason": "concession"
+    },
+    {
+      "did": "a82534dbd8f156f2",
+      "reason": "concession"
+    },
+    {
+      "did": "3541a320125e9aac",
+      "reason": "concession"
+    },
+    {
+      "did": "8cc230789c2dbb05",
+      "reason": "concession"
+    },
+    {
+      "did": "0b48f9ae3ce17f16",
+      "reason": "concession"
+    },
+    {
+      "did": "dcf51a7486e06d0a",
+      "reason": "concession"
+    },
+    {
+      "did": "b3ca4d94729ff0f4",
+      "reason": "concession"
+    },
+    {
+      "did": "2eeb79125de400d5",
+      "reason": "concession"
+    },
+    {
+      "did": "7bad5f3287127fcc",
+      "reason": "concession"
+    },
+    {
+      "did": "310b3931aa325e23",
+      "reason": "close_unreliable"
+    },
+    {
+      "did": "01bc141a9f2725a4",
+      "reason": "concession"
+    },
+    {
+      "did": "6edf24601200b925",
+      "reason": "concession"
+    },
+    {
+      "did": "e3befba07ec9ee0a",
+      "reason": "concession"
+    },
+    {
+      "did": "531700bb5a283f91",
+      "reason": "concession"
+    },
+    {
+      "did": "c5ac40443555e7be",
+      "reason": "concession"
+    },
+    {
+      "did": "1585dec7fd61b239",
+      "reason": "concession"
+    },
+    {
+      "did": "07d835c2919986d2",
+      "reason": "concession"
+    },
+    {
+      "did": "6a2a6d9d16a870a5",
+      "reason": "concession"
+    },
+    {
+      "did": "b7704ac20b98914c",
+      "reason": "concession"
+    },
+    {
+      "did": "ff15d751ec6c7192",
+      "reason": "concession"
+    },
+    {
+      "did": "4ec93b407a681603",
+      "reason": "concession"
+    },
+    {
+      "did": "5a6b1382ac907354",
+      "reason": "concession"
+    },
+    {
+      "did": "8cd73f729458f9ce",
+      "reason": "concession"
+    },
+    {
+      "did": "dc4cc8a5eff47510",
+      "reason": "concession"
+    },
+    {
+      "did": "1ee1af0cb7e42618",
+      "reason": "concession"
+    },
+    {
+      "did": "97ee0fb68edb782b",
+      "reason": "concession"
+    },
+    {
+      "did": "9433d5d73875f527",
+      "reason": "orphan"
+    },
+    {
+      "did": "6f0d76b3ddac9d73",
+      "reason": "concession"
+    },
+    {
+      "did": "74bca40d706fda6c",
+      "reason": "concession"
+    },
+    {
+      "did": "f787935187bdf548",
+      "reason": "concession"
+    },
+    {
+      "did": "8cd94d8ef6595566",
+      "reason": "concession"
+    },
+    {
+      "did": "7c82ac70962893f8",
+      "reason": "concession"
+    },
+    {
+      "did": "860c099ef4de81d6",
+      "reason": "concession"
+    },
+    {
+      "did": "184d5b7ca75154ba",
+      "reason": "concession"
+    },
+    {
+      "did": "37fcf3ec0a53cd67",
+      "reason": "close_unreliable"
+    },
+    {
+      "did": "4142ab148cbef778",
+      "reason": "concession"
+    },
+    {
+      "did": "02e6592bb95124c6",
+      "reason": "concession"
+    },
+    {
+      "did": "ce67344fa57dabf1",
+      "reason": "concession"
+    },
+    {
+      "did": "a7622d970014531b",
+      "reason": "concession"
+    },
+    {
+      "did": "f366bb4aab810735",
+      "reason": "concession"
+    },
+    {
+      "did": "72d813c713ecfff2",
+      "reason": "concession"
+    },
+    {
+      "did": "b15814b207b46cc3",
+      "reason": "concession"
+    },
+    {
+      "did": "e062cc9c78b77eb2",
+      "reason": "concession"
+    },
+    {
+      "did": "83e93c0ce528b0ac",
+      "reason": "concession"
+    },
+    {
+      "did": "c8e6313ce253fabf",
+      "reason": "concession"
+    },
+    {
+      "did": "50fb0dee3df2a774",
+      "reason": "concession"
+    },
+    {
+      "did": "d1e1c0160a61387e",
+      "reason": "concession"
+    },
+    {
+      "did": "8d01b1fcf9bd92b9",
+      "reason": "concession"
+    },
+    {
+      "did": "a8e34cb25fc04a23",
+      "reason": "concession"
+    },
+    {
+      "did": "a9de9ee740b3d4f2",
+      "reason": "concession"
+    },
+    {
+      "did": "e6c38b722e002cde",
+      "reason": "concession"
+    },
+    {
+      "did": "2455b07435cf0e3f",
+      "reason": "concession"
+    },
+    {
+      "did": "5f919f437062b615",
+      "reason": "concession"
+    },
+    {
+      "did": "bd6abcc521ee3422",
+      "reason": "concession"
+    },
+    {
+      "did": "52a5b082124c5ca3",
+      "reason": "concession"
+    },
+    {
+      "did": "bbcf4cfb6785799a",
+      "reason": "concession"
+    },
+    {
+      "did": "94f8794138fd958c",
+      "reason": "concession"
+    },
+    {
+      "did": "5eff3caa7083ba0b",
+      "reason": "concession"
+    },
+    {
+      "did": "a89f060442750100",
+      "reason": "concession"
+    },
+    {
+      "did": "fb792800cbc6ca80",
+      "reason": "concession"
+    },
+    {
+      "did": "ee4305fbb95deb89",
+      "reason": "concession"
+    },
+    {
+      "did": "a40cbbfe2a22d05f",
+      "reason": "concession"
+    },
+    {
+      "did": "f403cff8e2a8cc69",
+      "reason": "concession"
+    },
+    {
+      "did": "f5ad51821ae746dc",
+      "reason": "concession"
+    },
+    {
+      "did": "0a2279f4e374aaa1",
+      "reason": "concession"
+    },
+    {
+      "did": "c2e58d06ae09bd35",
+      "reason": "concession"
+    },
+    {
+      "did": "240e1d0d33971713",
+      "reason": "concession"
+    },
+    {
+      "did": "8d496ac6ae7abc55",
+      "reason": "concession"
+    },
+    {
+      "did": "416e9332069a6cac",
+      "reason": "concession"
+    },
+    {
+      "did": "b8b26ce0be582866",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "6b18e42b8c34fa3c",
+      "reason": "concession"
+    },
+    {
+      "did": "d1aef574c7c7e927",
+      "reason": "concession"
+    },
+    {
+      "did": "9f5d965b8bd2eff1",
+      "reason": "close_unreliable"
+    },
+    {
+      "did": "d577e86495046901",
+      "reason": "concession"
+    },
+    {
+      "did": "03f5ee0d980a18af",
+      "reason": "concession"
+    },
+    {
+      "did": "14575ea6cd467bf9",
+      "reason": "concession"
+    },
+    {
+      "did": "6d150cbb96eaf3e9",
+      "reason": "concession"
+    },
+    {
+      "did": "d524e9568bf84548",
+      "reason": "concession"
+    },
+    {
+      "did": "3c13a5e8f496b0c2",
+      "reason": "concession"
+    },
+    {
+      "did": "a236fe20911f589f",
+      "reason": "concession"
+    },
+    {
+      "did": "b916f29a918a0272",
+      "reason": "concession"
+    },
+    {
+      "did": "d7b46dfd3c21b3fb",
+      "reason": "concession"
+    },
+    {
+      "did": "43014c69a9d848d9",
+      "reason": "concession"
+    },
+    {
+      "did": "f03f944c975c5c03",
+      "reason": "concession"
+    },
+    {
+      "did": "ff071834819a4e05",
+      "reason": "concession"
+    },
+    {
+      "did": "5f8024903b423881",
+      "reason": "concession"
+    },
+    {
+      "did": "4f54b2fcfebaf73e",
+      "reason": "concession"
+    },
+    {
+      "did": "fa5d168c670dbd60",
+      "reason": "concession"
+    },
+    {
+      "did": "16b71ac9750f46d6",
+      "reason": "concession"
+    },
+    {
+      "did": "474a2aa73824e417",
+      "reason": "concession"
+    },
+    {
+      "did": "ad5f11c795688e1c",
+      "reason": "concession"
+    },
+    {
+      "did": "ec2f5fbaa277a23c",
+      "reason": "concession"
+    },
+    {
+      "did": "2fa00fb08b515328",
+      "reason": "concession"
+    },
+    {
+      "did": "87f700366e0ad9b9",
+      "reason": "concession"
+    },
+    {
+      "did": "7197d4ce5cc05ea7",
+      "reason": "concession"
+    },
+    {
+      "did": "209b06142212707d",
+      "reason": "concession"
+    },
+    {
+      "did": "fd8934301e8e3a48",
+      "reason": "concession"
+    },
+    {
+      "did": "ba5a9590307e7852",
+      "reason": "concession"
+    },
+    {
+      "did": "f2b3b89df974b248",
+      "reason": "concession"
+    },
+    {
+      "did": "19d5797515ee5e66",
+      "reason": "concession"
+    },
+    {
+      "did": "ffb9d3035d1fb2af",
+      "reason": "concession"
+    },
+    {
+      "did": "dccd52d292e607a8",
+      "reason": "concession"
+    },
+    {
+      "did": "0f74eb23db02e941",
+      "reason": "concession"
+    },
+    {
+      "did": "f50950ede8a21042",
+      "reason": "concession"
+    },
+    {
+      "did": "a3d23baaf4b873b7",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "dbaa3335abb3c496",
+      "reason": "concession"
+    },
+    {
+      "did": "6965bc6bd51fe24a",
+      "reason": "concession"
+    },
+    {
+      "did": "eace00c69c793dc3",
+      "reason": "concession"
+    },
+    {
+      "did": "6296856598021f45",
+      "reason": "concession"
+    },
+    {
+      "did": "97cc28f077dee741",
+      "reason": "concession"
+    },
+    {
+      "did": "4c45cd9d45c9c4f9",
+      "reason": "concession"
+    },
+    {
+      "did": "fa3e48479f0a31c5",
+      "reason": "concession"
+    },
+    {
+      "did": "962c1efa96caa2d2",
+      "reason": "concession"
+    },
+    {
+      "did": "ed0e7b06fbb856be",
+      "reason": "concession"
+    },
+    {
+      "did": "8897e1e1cd14a810",
+      "reason": "concession"
+    },
+    {
+      "did": "0bc461112187522a",
+      "reason": "concession"
+    },
+    {
+      "did": "fe233b6b885b5fa8",
+      "reason": "concession"
+    },
+    {
+      "did": "1b57af5dda91f5ac",
+      "reason": "concession"
+    },
+    {
+      "did": "828dc57a641c3755",
+      "reason": "concession"
+    },
+    {
+      "did": "94a86fea35b5f69e",
+      "reason": "concession"
+    },
+    {
+      "did": "f7191e264903cc59",
+      "reason": "concession"
+    },
+    {
+      "did": "c75f3299c6b6ad3f",
+      "reason": "concession"
+    },
+    {
+      "did": "05f7c8957fa8e946",
+      "reason": "concession"
+    },
+    {
+      "did": "39eda9c7187c4177",
+      "reason": "concession"
+    },
+    {
+      "did": "b250bdef15a20461",
+      "reason": "concession"
+    },
+    {
+      "did": "5117b939e04f874a",
+      "reason": "concession"
+    },
+    {
+      "did": "1f9ace59c62d4d06",
+      "reason": "concession"
+    },
+    {
+      "did": "3a0f2491b7392503",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "53222339854f9a21",
+      "reason": "concession"
+    },
+    {
+      "did": "e3c607021585d07b",
+      "reason": "concession"
+    },
+    {
+      "did": "c87445dd849e26b9",
+      "reason": "concession"
+    },
+    {
+      "did": "64455bd2d314e8dd",
+      "reason": "concession"
+    },
+    {
+      "did": "0a08176bd6521f6b",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "742a48cbf0eba84d",
+      "reason": "concession"
+    },
+    {
+      "did": "e4d3d16ae5ba0052",
+      "reason": "concession"
+    },
+    {
+      "did": "94e8cb9a8d0f41ff",
+      "reason": "concession"
+    },
+    {
+      "did": "d6c5a2d2415a32d1",
+      "reason": "concession"
+    },
+    {
+      "did": "88cb7da42fe5292b",
+      "reason": "concession"
+    },
+    {
+      "did": "1ff6861025efc935",
+      "reason": "concession"
+    },
+    {
+      "did": "7a8077bf94675863",
+      "reason": "concession"
+    },
+    {
+      "did": "dd68054f93d0d05e",
+      "reason": "concession"
+    },
+    {
+      "did": "47efd7918aa86fcf",
+      "reason": "concession"
+    },
+    {
+      "did": "3e078d1c76bf8d9b",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "237c7f4d03447813",
+      "reason": "concession"
+    },
+    {
+      "did": "f6eec1d6b1bf5386",
+      "reason": "concession"
+    },
+    {
+      "did": "98116e032381ffe8",
+      "reason": "concession"
+    },
+    {
+      "did": "dd7290e8dc9cc239",
+      "reason": "concession"
+    },
+    {
+      "did": "08714a32d2213026",
+      "reason": "concession"
+    },
+    {
+      "did": "eb32f504da528dff",
+      "reason": "concession"
+    },
+    {
+      "did": "62879062a30261d0",
+      "reason": "concession"
+    },
+    {
+      "did": "7cc8bf1058e233c4",
+      "reason": "concession"
+    },
+    {
+      "did": "abfd63808259133c",
+      "reason": "concession"
+    },
+    {
+      "did": "93a5a98f0610c2b0",
+      "reason": "concession"
+    },
+    {
+      "did": "c97c5f0dae273703",
+      "reason": "concession"
+    },
+    {
+      "did": "f0ae66d3d8fa2d71",
+      "reason": "concession"
+    },
+    {
+      "did": "e622e60b93e2cde1",
+      "reason": "concession"
+    },
+    {
+      "did": "0a38ed3464dfdcdb",
+      "reason": "concession"
+    },
+    {
+      "did": "fca0c1a21a0fd793",
+      "reason": "concession"
+    },
+    {
+      "did": "a78ceb1725b223e3",
+      "reason": "concession"
+    },
+    {
+      "did": "c24475788c10bb9f",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "bae7245db8e886e8",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "3690d275559d6d83",
+      "reason": "concession"
+    },
+    {
+      "did": "6c054e47cc036144",
+      "reason": "concession"
+    },
+    {
+      "did": "0aa00534bc575a07",
+      "reason": "concession"
+    },
+    {
+      "did": "628a6c41139b0633",
+      "reason": "concession"
+    },
+    {
+      "did": "6872d1fae844b5f8",
+      "reason": "concession"
+    },
+    {
+      "did": "99ea86154d388186",
+      "reason": "concession"
+    },
+    {
+      "did": "77139443d0c479e4",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "d600d39402e2752f",
+      "reason": "concession"
+    },
+    {
+      "did": "7dc5323b04253691",
+      "reason": "concession"
+    },
+    {
+      "did": "cfcbe43e85a61883",
+      "reason": "concession"
+    },
+    {
+      "did": "982d7ad9e30aeffb",
+      "reason": "concession"
+    },
+    {
+      "did": "981c59b9bc1d20d4",
+      "reason": "concession"
+    },
+    {
+      "did": "e3c685ee41b5c189",
+      "reason": "close_unreliable"
+    },
+    {
+      "did": "4fe682c67872b467",
+      "reason": "concession"
+    },
+    {
+      "did": "e23f3e2cf94bc25d",
+      "reason": "concession"
+    },
+    {
+      "did": "2982b003f6577416",
+      "reason": "concession"
+    },
+    {
+      "did": "207380919a8b2e3c",
+      "reason": "concession"
+    },
+    {
+      "did": "8e3cc846206ccbad",
+      "reason": "concession"
+    },
+    {
+      "did": "f5d21c5c44c0c903",
+      "reason": "concession"
+    },
+    {
+      "did": "0bd15ffaead5884a",
+      "reason": "concession"
+    },
+    {
+      "did": "b55cb509dd7fb647",
+      "reason": "concession"
+    },
+    {
+      "did": "cf914dd9ae52b03e",
+      "reason": "concession"
+    },
+    {
+      "did": "dfee605fc58396f9",
+      "reason": "concession"
+    },
+    {
+      "did": "56f38d3c72c2f225",
+      "reason": "concession"
+    },
+    {
+      "did": "855e8daad44ad6e6",
+      "reason": "concession"
+    },
+    {
+      "did": "1db1ba4ab7da5bda",
+      "reason": "concession"
+    },
+    {
+      "did": "56e18fbd6f12f5e7",
+      "reason": "concession"
+    },
+    {
+      "did": "827185f5003d6086",
+      "reason": "concession"
+    },
+    {
+      "did": "4e9a222dfb05ebc0",
+      "reason": "concession"
+    },
+    {
+      "did": "91384364de71e1f2",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "94492c1ec9a39235",
+      "reason": "concession"
+    },
+    {
+      "did": "307f2ddd130b4579",
+      "reason": "concession"
+    },
+    {
+      "did": "f4b7fb514ff733ed",
+      "reason": "concession"
+    },
+    {
+      "did": "219df88f400a9da7",
+      "reason": "concession"
+    },
+    {
+      "did": "ee70fba1ef69ba0f",
+      "reason": "concession"
+    },
+    {
+      "did": "aaff10b348791497",
+      "reason": "concession"
+    },
+    {
+      "did": "072c2ec6051d76e9",
+      "reason": "concession"
+    },
+    {
+      "did": "c16f96871c1043c9",
+      "reason": "concession"
+    },
+    {
+      "did": "2bcbc0bfec6fb858",
+      "reason": "concession"
+    },
+    {
+      "did": "4e003686c319b7fd",
+      "reason": "concession"
+    },
+    {
+      "did": "1661bebaf540ead9",
+      "reason": "concession"
+    },
+    {
+      "did": "81b9628ed2146c81",
+      "reason": "concession"
+    },
+    {
+      "did": "a5fc7467bcb214d8",
+      "reason": "concession"
+    },
+    {
+      "did": "394bc4f6414d45c1",
+      "reason": "concession"
+    },
+    {
+      "did": "5b030074f344aac6",
+      "reason": "concession"
+    },
+    {
+      "did": "076888717ecdf8bc",
+      "reason": "concession"
+    },
+    {
+      "did": "50036d1821be19b4",
+      "reason": "concession"
+    },
+    {
+      "did": "293448731096746d",
+      "reason": "concession"
+    },
+    {
+      "did": "4689484eca67deae",
+      "reason": "concession"
+    },
+    {
+      "did": "7f20d4570909bec9",
+      "reason": "concession"
+    },
+    {
+      "did": "6908afc60edc7fef",
+      "reason": "concession"
+    },
+    {
+      "did": "235ce9a28a454ec7",
+      "reason": "concession"
+    },
+    {
+      "did": "a5135e07807edea4",
+      "reason": "concession"
+    },
+    {
+      "did": "057bab3a940d3fc7",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "26c8a2f323286d89",
+      "reason": "concession"
+    },
+    {
+      "did": "eccfd11f5a5ccdd9",
+      "reason": "concession"
+    },
+    {
+      "did": "3c67ab6e29363492",
+      "reason": "concession"
+    },
+    {
+      "did": "816e0fa64f8a8489",
+      "reason": "concession"
+    },
+    {
+      "did": "e1953b6a71d8df7e",
+      "reason": "concession"
+    },
+    {
+      "did": "adc4d42fe345ecea",
+      "reason": "concession"
+    },
+    {
+      "did": "803c6cc1bea8c7f0",
+      "reason": "concession"
+    },
+    {
+      "did": "837b82fbf84bf720",
+      "reason": "concession"
+    },
+    {
+      "did": "2433851815ce6968",
+      "reason": "concession"
+    },
+    {
+      "did": "6bc69650485a738d",
+      "reason": "concession"
+    },
+    {
+      "did": "6a31649bbfb99fbe",
+      "reason": "concession"
+    },
+    {
+      "did": "0fb49580018636d8",
+      "reason": "concession"
+    },
+    {
+      "did": "07358268e6fde103",
+      "reason": "concession"
+    },
+    {
+      "did": "601ee13b814d686c",
+      "reason": "concession"
+    },
+    {
+      "did": "46c2407e378044ef",
+      "reason": "concession"
+    },
+    {
+      "did": "767dec3235b3bbd4",
+      "reason": "concession"
+    },
+    {
+      "did": "c09ef7a5f8a867d3",
+      "reason": "concession"
+    },
+    {
+      "did": "ae34475d7dba3db1",
+      "reason": "concession"
+    },
+    {
+      "did": "3195a5e036eb1001",
+      "reason": "concession"
+    },
+    {
+      "did": "a89eacd873a6ad3c",
+      "reason": "concession"
+    },
+    {
+      "did": "21147d25bc7e05f7",
+      "reason": "concession"
+    },
+    {
+      "did": "f307cd65fab88db1",
+      "reason": "concession"
+    },
+    {
+      "did": "ff5f68a0316cd261",
+      "reason": "concession"
+    },
+    {
+      "did": "7a39a2b52f8a91e8",
+      "reason": "concession"
+    },
+    {
+      "did": "93c433c956dc2b40",
+      "reason": "concession"
+    },
+    {
+      "did": "f58797c918eac77f",
+      "reason": "concession"
+    },
+    {
+      "did": "0d647770bd302727",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "9d9c43ce4fac8771",
+      "reason": "concession"
+    },
+    {
+      "did": "807c94b6ad1bcb29",
+      "reason": "concession"
+    },
+    {
+      "did": "8cf8fb6f548e535a",
+      "reason": "concession"
+    },
+    {
+      "did": "b1a16909d61ca15c",
+      "reason": "concession"
+    },
+    {
+      "did": "ca64200d7e3eed0a",
+      "reason": "concession"
+    },
+    {
+      "did": "170b1b0d03dcf731",
+      "reason": "concession"
+    },
+    {
+      "did": "dba5e53c284a91cb",
+      "reason": "concession"
+    },
+    {
+      "did": "33f82af74fd8bdc6",
+      "reason": "concession"
+    },
+    {
+      "did": "c94a4911fa044d6f",
+      "reason": "concession"
+    },
+    {
+      "did": "ed2062a6a71e69ac",
+      "reason": "concession"
+    },
+    {
+      "did": "e4c00db92ce3945b",
+      "reason": "concession"
+    },
+    {
+      "did": "ff3dfea8f8efb883",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "23932cd55a18d038",
+      "reason": "concession"
+    },
+    {
+      "did": "e5b367607431e4e0",
+      "reason": "concession"
+    },
+    {
+      "did": "44b96975b78593f2",
+      "reason": "concession"
+    },
+    {
+      "did": "68ef92f1cba0f46e",
+      "reason": "concession"
+    },
+    {
+      "did": "ddb07e4bf3eb5c2a",
+      "reason": "concession"
+    },
+    {
+      "did": "5a8fcceaeb05e9c7",
+      "reason": "concession"
+    },
+    {
+      "did": "fd2f4b6279674283",
+      "reason": "concession"
+    },
+    {
+      "did": "e67c953139dc048e",
+      "reason": "concession"
+    },
+    {
+      "did": "3ccfa187f7e80c2e",
+      "reason": "concession"
+    },
+    {
+      "did": "488dd76a900428be",
+      "reason": "concession"
+    },
+    {
+      "did": "8af41bbe3f14807b",
+      "reason": "concession"
+    },
+    {
+      "did": "22497d52e49446c8",
+      "reason": "concession"
+    },
+    {
+      "did": "5f3d3ff1e93c1f98",
+      "reason": "concession"
+    },
+    {
+      "did": "b3bef0e7e4979911",
+      "reason": "concession"
+    },
+    {
+      "did": "25b8f5f3acecf58a",
+      "reason": "concession"
+    },
+    {
+      "did": "556233ce5c9d7a06",
+      "reason": "concession"
+    },
+    {
+      "did": "956954454b8e1277",
+      "reason": "concession"
+    },
+    {
+      "did": "e7d5051d46220ebc",
+      "reason": "concession"
+    },
+    {
+      "did": "2a41eb506c6e3d59",
+      "reason": "concession"
+    },
+    {
+      "did": "f17ea9ca7d6da344",
+      "reason": "concession"
+    },
+    {
+      "did": "cfb661fd6ab4009f",
+      "reason": "concession"
+    },
+    {
+      "did": "76024d0f82dd90b7",
+      "reason": "concession"
+    },
+    {
+      "did": "e3bf410101057b87",
+      "reason": "concession"
+    },
+    {
+      "did": "e5d1753076ba20a0",
+      "reason": "concession"
+    },
+    {
+      "did": "602924b7cc3c26ce",
+      "reason": "concession"
+    },
+    {
+      "did": "10c46b29216027b4",
+      "reason": "concession"
+    },
+    {
+      "did": "785ffceb70875f9c",
+      "reason": "concession"
+    },
+    {
+      "did": "8596b2079121e66b",
+      "reason": "concession"
+    },
+    {
+      "did": "eb4ff52595a143f8",
+      "reason": "concession"
+    },
+    {
+      "did": "aad65a36d7960e90",
+      "reason": "concession"
+    },
+    {
+      "did": "b91baa6fd6401b93",
+      "reason": "concession"
+    },
+    {
+      "did": "d95a2bfc16fdaded",
+      "reason": "close_unreliable"
+    },
+    {
+      "did": "8744e8fde802d105",
+      "reason": "concession"
+    },
+    {
+      "did": "ee11faf783f15a27",
+      "reason": "concession"
+    },
+    {
+      "did": "52e727d68de92835",
+      "reason": "concession"
+    },
+    {
+      "did": "f22bd854dc3e1101",
+      "reason": "concession"
+    },
+    {
+      "did": "c186b2e6103ce5a7",
+      "reason": "concession"
+    },
+    {
+      "did": "05bb1a4d7fecbdf7",
+      "reason": "concession"
+    },
+    {
+      "did": "9e6a18012ac587ab",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "df8aaf943e04a9d9",
+      "reason": "concession"
+    },
+    {
+      "did": "4e6c681f029cc3a9",
+      "reason": "concession"
+    },
+    {
+      "did": "118e062fa1b02699",
+      "reason": "concession"
+    },
+    {
+      "did": "a1853bf65e2d086a",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "7326776ba84e27b3",
+      "reason": "concession"
+    },
+    {
+      "did": "278c523250fbf137",
+      "reason": "concession"
+    },
+    {
+      "did": "9e0ebec1681c3d34",
+      "reason": "concession"
+    },
+    {
+      "did": "92d268dd960e6e7c",
+      "reason": "leak"
+    },
+    {
+      "did": "5df83710a1c25a69",
+      "reason": "concession"
+    },
+    {
+      "did": "c20474db8c105afd",
+      "reason": "concession"
+    },
+    {
+      "did": "e5d17517279930da",
+      "reason": "concession"
+    },
+    {
+      "did": "069c96d07a3a2437",
+      "reason": "concession"
+    },
+    {
+      "did": "7abd35e332f458d1",
+      "reason": "concession"
+    },
+    {
+      "did": "b74955c624a34c10",
+      "reason": "concession"
+    },
+    {
+      "did": "c560317ab7addc8a",
+      "reason": "concession"
+    },
+    {
+      "did": "23da9ebbe8a6a8ce",
+      "reason": "concession"
+    },
+    {
+      "did": "0523de4f0427ca9d",
+      "reason": "concession"
+    },
+    {
+      "did": "42dc275975b1aabd",
+      "reason": "concession"
+    },
+    {
+      "did": "1e7990c153056a3d",
+      "reason": "concession"
+    },
+    {
+      "did": "c7c6f22c11e3b2d9",
+      "reason": "concession"
+    },
+    {
+      "did": "0bfc562b506b8502",
+      "reason": "concession"
+    },
+    {
+      "did": "94c1205228eac9bd",
+      "reason": "concession"
+    },
+    {
+      "did": "5ea7aed1c171224a",
+      "reason": "concession"
+    },
+    {
+      "did": "85ad1f087b4ddc60",
+      "reason": "concession"
+    },
+    {
+      "did": "a4e15bef0e561b58",
+      "reason": "concession"
+    },
+    {
+      "did": "dbdafd63ac620b4f",
+      "reason": "concession"
+    },
+    {
+      "did": "05fd62200406c319",
+      "reason": "concession"
+    },
+    {
+      "did": "ee954001a7b824e0",
+      "reason": "concession"
+    },
+    {
+      "did": "c536bb8a99c309c8",
+      "reason": "concession"
+    },
+    {
+      "did": "b662dc0cffcc3d38",
+      "reason": "concession"
+    },
+    {
+      "did": "a06899745ee58b0d",
+      "reason": "concession"
+    },
+    {
+      "did": "06447ee65defaaf0",
+      "reason": "concession"
+    },
+    {
+      "did": "9b2a66eb44031340",
+      "reason": "concession"
+    },
+    {
+      "did": "b7983264135c3993",
+      "reason": "concession"
+    },
+    {
+      "did": "87285cdeda9238a8",
+      "reason": "concession"
+    },
+    {
+      "did": "2b59f12d76542988",
+      "reason": "concession"
+    },
+    {
+      "did": "e1c7a27e47464ab2",
+      "reason": "concession"
+    },
+    {
+      "did": "04c0b883c6471075",
+      "reason": "concession"
+    },
+    {
+      "did": "6042c7a6f6fecfe5",
+      "reason": "concession"
+    },
+    {
+      "did": "2e85f45c5219dcba",
+      "reason": "concession"
+    },
+    {
+      "did": "86208e0e32873985",
+      "reason": "concession"
+    },
+    {
+      "did": "38b826ce6a815e6c",
+      "reason": "concession"
+    },
+    {
+      "did": "38be02a89e90c642",
+      "reason": "concession"
+    },
+    {
+      "did": "e77f5a0f897fe7c4",
+      "reason": "concession"
+    },
+    {
+      "did": "39549e728bdf8176",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "1fd80595eb6abf7b",
+      "reason": "concession"
+    },
+    {
+      "did": "bcd0d41ec4520bf3",
+      "reason": "concession"
+    },
+    {
+      "did": "4d3fe1b2d74f33fd",
+      "reason": "concession"
+    },
+    {
+      "did": "bae563cc112fff26",
+      "reason": "concession"
+    },
+    {
+      "did": "e5cd8b2d6f8ee07f",
+      "reason": "concession"
+    },
+    {
+      "did": "cab5569485eeb94c",
+      "reason": "concession"
+    },
+    {
+      "did": "65d8164e8c1ce8be",
+      "reason": "concession"
+    },
+    {
+      "did": "791c15814462d602",
+      "reason": "concession"
+    },
+    {
+      "did": "9fbd572cf3f473b0",
+      "reason": "concession"
+    },
+    {
+      "did": "226f8ec2728cc51a",
+      "reason": "concession"
+    },
+    {
+      "did": "68453cc15d6f9b97",
+      "reason": "concession"
+    },
+    {
+      "did": "a0fc18ad2f00c968",
+      "reason": "concession"
+    },
+    {
+      "did": "915ad2e996fd2e7c",
+      "reason": "concession"
+    },
+    {
+      "did": "dc6f5fa1ae781255",
+      "reason": "concession"
+    },
+    {
+      "did": "6ab5815ab6b06935",
+      "reason": "concession"
+    },
+    {
+      "did": "b8f6fd2165beadc3",
+      "reason": "concession"
+    },
+    {
+      "did": "5cc5e7bba71881da",
+      "reason": "concession"
+    },
+    {
+      "did": "7642ea3a3b50f79d",
+      "reason": "concession"
+    },
+    {
+      "did": "d439f0185772ff2c",
+      "reason": "concession"
+    },
+    {
+      "did": "a5808b48f07a101e",
+      "reason": "concession"
+    },
+    {
+      "did": "0d5eef7ddae87410",
+      "reason": "concession"
+    },
+    {
+      "did": "018dd8aad2d839eb",
+      "reason": "concession"
+    },
+    {
+      "did": "42ee22fa18d69c43",
+      "reason": "concession"
+    },
+    {
+      "did": "dff21db005dec239",
+      "reason": "concession"
+    },
+    {
+      "did": "9579420a341de5c1",
+      "reason": "concession"
+    },
+    {
+      "did": "1473257f1be8dc4d",
+      "reason": "concession"
+    },
+    {
+      "did": "d61b25ee41060f07",
+      "reason": "concession"
+    },
+    {
+      "did": "58cc346a18c0f9cd",
+      "reason": "concession"
+    },
+    {
+      "did": "66aa7954b4e979e8",
+      "reason": "concession"
+    },
+    {
+      "did": "46a35197852e42ba",
+      "reason": "concession"
+    },
+    {
+      "did": "a863d720d444508b",
+      "reason": "concession"
+    },
+    {
+      "did": "1f79b856d3f44d2d",
+      "reason": "concession"
+    },
+    {
+      "did": "48880c72a7fef5bd",
+      "reason": "concession"
+    },
+    {
+      "did": "ac01241800c52292",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "5f26bfee4cbb5d37",
+      "reason": "concession"
+    },
+    {
+      "did": "948deb125e68eef8",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "cb77857ba4e6504f",
+      "reason": "concession"
+    },
+    {
+      "did": "5ea94741954e90ef",
+      "reason": "concession"
+    },
+    {
+      "did": "ffec9ebaca9fc77e",
+      "reason": "concession"
+    },
+    {
+      "did": "34586f47d2b2d6e1",
+      "reason": "concession"
+    },
+    {
+      "did": "6837400abe5b224e",
+      "reason": "concession"
+    },
+    {
+      "did": "c214fc03bc2c0705",
+      "reason": "concession"
+    },
+    {
+      "did": "c005e4e88f285dae",
+      "reason": "concession"
+    },
+    {
+      "did": "b0c440f193f26e08",
+      "reason": "concession"
+    },
+    {
+      "did": "3360426f62ef5d3b",
+      "reason": "concession"
+    },
+    {
+      "did": "8a32f00560eeb651",
+      "reason": "concession"
+    },
+    {
+      "did": "b01e30ff991d36a2",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "7003fcbd919c9944",
+      "reason": "concession"
+    },
+    {
+      "did": "10a86eccbf4a111b",
+      "reason": "concession"
+    },
+    {
+      "did": "9b3b7c5449085d13",
+      "reason": "concession"
+    },
+    {
+      "did": "58d6231f14524116",
+      "reason": "concession"
+    },
+    {
+      "did": "580b242c358dad28",
+      "reason": "close_unreliable"
+    },
+    {
+      "did": "011ae822780ce423",
+      "reason": "concession"
+    },
+    {
+      "did": "f96417e9fb4931a4",
+      "reason": "concession"
+    },
+    {
+      "did": "27399b705081b783",
+      "reason": "concession"
+    },
+    {
+      "did": "2fdf4bfdb29af6f6",
+      "reason": "concession"
+    },
+    {
+      "did": "f1a43120d6f21ce9",
+      "reason": "concession"
+    },
+    {
+      "did": "9c09682f0ce3f2c3",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "2b40324f2afb15ba",
+      "reason": "concession"
+    },
+    {
+      "did": "779705f2f386b93f",
+      "reason": "concession"
+    },
+    {
+      "did": "6691817c19306d2e",
+      "reason": "concession"
+    },
+    {
+      "did": "92220889fb64484f",
+      "reason": "concession"
+    },
+    {
+      "did": "53602529f864d167",
+      "reason": "concession"
+    },
+    {
+      "did": "866e552c3abbbf39",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "85190d7677f4a4b0",
+      "reason": "concession"
+    },
+    {
+      "did": "4331dedcbcde8d7d",
+      "reason": "concession"
+    },
+    {
+      "did": "515186dcfd8475af",
+      "reason": "passb_no_deal"
+    },
+    {
+      "did": "ea420fee5d50419c",
+      "reason": "concession"
+    },
+    {
+      "did": "d4a7402c37a33f87",
+      "reason": "concession"
+    },
+    {
+      "did": "77ebfde6cee3ce32",
+      "reason": "concession"
+    },
+    {
+      "did": "1cfb0690237ffdda",
+      "reason": "concession"
+    },
+    {
+      "did": "2e9d774d94dd97ac",
+      "reason": "concession"
+    },
+    {
+      "did": "9b8f6ffd1ddd0e37",
+      "reason": "concession"
+    },
+    {
+      "did": "a5df007c731ba3fa",
+      "reason": "concession"
+    },
+    {
+      "did": "824df8228e54cd2c",
+      "reason": "concession"
+    },
+    {
+      "did": "95f89c6b9e18c6b1",
+      "reason": "concession"
+    },
+    {
+      "did": "b3a16a5600ec63b9",
+      "reason": "concession"
+    },
+    {
+      "did": "1ced6a6bc3c44e86",
+      "reason": "concession"
+    },
+    {
+      "did": "9209bbc7d01b9175",
+      "reason": "concession"
+    },
+    {
+      "did": "8bc96f044bf847a0",
+      "reason": "concession"
+    },
+    {
+      "did": "f4a91cf8b5facfba",
+      "reason": "concession"
+    },
+    {
+      "did": "c77c13ad252632ba",
+      "reason": "concession"
+    }
+  ]
+}
