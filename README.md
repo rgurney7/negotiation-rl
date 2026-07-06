@@ -2,8 +2,7 @@
 
 A controlled comparison of three ways to teach a 4B language model to bargain: **SFT**,
 **GRPO**, and **PPO**, all on the same CraigslistBargains seller task, the same base model, the
-same data, the same opponent, and the same reward — trained as identically as the algorithms
-allow, and evaluated through one shared harness.
+same data, the same opponent, and the same reward and evaluated through one shared harness.
 
 The point is not to crown a winner in the abstract. It is to hold every experimental condition
 constant so that whatever difference appears between the three is attributable to the *learning
