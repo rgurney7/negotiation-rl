@@ -1,0 +1,85 @@
+{
+  "methods": [
+    "sft",
+    "grpo",
+    "ppo"
+  ],
+  "metrics": {
+    "sft": {
+      "n": 149,
+      "mean_reward": 0.5063,
+      "deal_rate": 0.8523,
+      "mean_ratio": 0.797
+    },
+    "grpo": {
+      "n": 149,
+      "mean_reward": 0.4032,
+      "deal_rate": 0.9933,
+      "mean_ratio": 0.7189
+    },
+    "ppo": {
+      "n": 150,
+      "mean_reward": 0.4249,
+      "deal_rate": 0.7067,
+      "mean_ratio": 0.8146
+    }
+  },
+  "common_n": 149,
+  "metrics_common": {
+    "sft": {
+      "n": 149,
+      "mean_reward": 0.5063,
+      "deal_rate": 0.8523,
+      "mean_ratio": 0.797
+    },
+    "grpo": {
+      "n": 149,
+      "mean_reward": 0.4032,
+      "deal_rate": 0.9933,
+      "mean_ratio": 0.7189
+    },
+    "ppo": {
+      "n": 149,
+      "mean_reward": 0.4222,
+      "deal_rate": 0.7047,
+      "mean_ratio": 0.8136
+    }
+  },
+  "win_rate": {
+    "sft_vs_grpo": 0.6711,
+    "sft_vs_ppo": 0.4832,
+    "grpo_vs_sft": 0.3289,
+    "grpo_vs_ppo": 0.3557,
+    "ppo_vs_sft": 0.5168,
+    "ppo_vs_grpo": 0.6443
+  },
+  "win_stats": {
+    "sft_vs_grpo": {
+      "n": 149,
+      "wins": 72,
+      "losses": 21,
+      "ties": 56,
+      "win_rate": 0.6711,
+      "p_value": 0.0,
+      "wilcoxon_p": 1.1e-05
+    },
+    "sft_vs_ppo": {
+      "n": 149,
+      "wins": 55,
+      "losses": 60,
+      "ties": 34,
+      "win_rate": 0.4832,
+      "p_value": 0.7093,
+      "wilcoxon_p": 0.055199
+    },
+    "grpo_vs_ppo": {
+      "n": 149,
+      "wins": 35,
+      "losses": 78,
+      "ties": 36,
+      "win_rate": 0.3557,
+      "p_value": 0.0001,
+      "wilcoxon_p": 0.119775
+    }
+  }
+}

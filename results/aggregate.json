@@ -1,0 +1,248 @@
+{
+  "eval_root": "/workspace",
+  "seeds_requested": [
+    1,
+    2,
+    3
+  ],
+  "methods": [
+    "sft",
+    "grpo",
+    "ppo"
+  ],
+  "n_seeds": 3,
+  "ci_eligible": false,
+  "stats_note": "N=3<5: descriptive ranges only; the headline is the within-seed Wilcoxon paired test + across-seed sign-consistency.",
+  "per_seed_common_n": {
+    "1": 149,
+    "2": 149,
+    "3": 149
+  },
+  "by_method": {
+    "sft": {
+      "seeds_found": [
+        1,
+        2,
+        3
+      ],
+      "mean_reward": {
+        "n": 3,
+        "values": [
+          0.4997,
+          0.4592,
+          0.5063
+        ],
+        "mean": 0.4884,
+        "std": 0.0255,
+        "min": 0.4592,
+        "max": 0.5063,
+        "interval": "descriptive range only (N=3 < 5: too few seeds for a bootstrap CI/IQM)"
+      },
+      "deal_rate": {
+        "n": 3,
+        "values": [
+          0.8993,
+          0.8121,
+          0.8523
+        ],
+        "mean": 0.8546,
+        "std": 0.0436,
+        "min": 0.8121,
+        "max": 0.8993,
+        "interval": "descriptive range only (N=3 < 5: too few seeds for a bootstrap CI/IQM)"
+      },
+      "mean_ratio": {
+        "n": 3,
+        "values": [
+          0.7848,
+          0.7827,
+          0.797
+        ],
+        "mean": 0.7882,
+        "std": 0.0077,
+        "min": 0.7827,
+        "max": 0.797,
+        "interval": "descriptive range only (N=3 < 5: too few seeds for a bootstrap CI/IQM)"
+      }
+    },
+    "grpo": {
+      "seeds_found": [
+        1,
+        2,
+        3
+      ],
+      "mean_reward": {
+        "n": 3,
+        "values": [
+          0.4151,
+          0.396,
+          0.4032
+        ],
+        "mean": 0.4048,
+        "std": 0.0096,
+        "min": 0.396,
+        "max": 0.4151,
+        "interval": "descriptive range only (N=3 < 5: too few seeds for a bootstrap CI/IQM)"
+      },
+      "deal_rate": {
+        "n": 3,
+        "values": [
+          0.9933,
+          0.9933,
+          0.9933
+        ],
+        "mean": 0.9933,
+        "std": 0.0,
+        "min": 0.9933,
+        "max": 0.9933,
+        "interval": "descriptive range only (N=3 < 5: too few seeds for a bootstrap CI/IQM)"
+      },
+      "mean_ratio": {
+        "n": 3,
+        "values": [
+          0.7248,
+          0.7211,
+          0.7189
+        ],
+        "mean": 0.7216,
+        "std": 0.003,
+        "min": 0.7189,
+        "max": 0.7248,
+        "interval": "descriptive range only (N=3 < 5: too few seeds for a bootstrap CI/IQM)"
+      }
+    },
+    "ppo": {
+      "seeds_found": [
+        1,
+        2,
+        3
+      ],
+      "mean_reward": {
+        "n": 3,
+        "values": [
+          0.422,
+          0.4365,
+          0.4222
+        ],
+        "mean": 0.4269,
+        "std": 0.0083,
+        "min": 0.422,
+        "max": 0.4365,
+        "interval": "descriptive range only (N=3 < 5: too few seeds for a bootstrap CI/IQM)"
+      },
+      "deal_rate": {
+        "n": 3,
+        "values": [
+          0.8591,
+          0.698,
+          0.7047
+        ],
+        "mean": 0.7539,
+        "std": 0.0911,
+        "min": 0.698,
+        "max": 0.8591,
+        "interval": "descriptive range only (N=3 < 5: too few seeds for a bootstrap CI/IQM)"
+      },
+      "mean_ratio": {
+        "n": 3,
+        "values": [
+          0.7497,
+          0.8173,
+          0.8136
+        ],
+        "mean": 0.7935,
+        "std": 0.038,
+        "min": 0.7497,
+        "max": 0.8173,
+        "interval": "descriptive range only (N=3 < 5: too few seeds for a bootstrap CI/IQM)"
+      }
+    },
+    "base": {
+      "seeds_found": [
+        1
+      ],
+      "mean_reward": {
+        "n": 1,
+        "values": [
+          0.3812
+        ],
+        "mean": 0.3812,
+        "interval": "descriptive range only (N=1 < 5: too few seeds for a bootstrap CI/IQM)"
+      },
+      "deal_rate": {
+        "n": 1,
+        "values": [
+          0.5839
+        ],
+        "mean": 0.5839,
+        "interval": "descriptive range only (N=1 < 5: too few seeds for a bootstrap CI/IQM)"
+      },
+      "mean_ratio": {
+        "n": 1,
+        "values": [
+          0.8264
+        ],
+        "mean": 0.8264,
+        "interval": "descriptive range only (N=1 < 5: too few seeds for a bootstrap CI/IQM)"
+      }
+    }
+  },
+  "primary_contrast": {
+    "pair": "ppo_vs_sft",
+    "per_seed": [
+      {
+        "seed": 1,
+        "mean_reward_diff": -0.0777,
+        "common_n": 149,
+        "within_seed_paired": {
+          "n": 149,
+          "wins": 39,
+          "losses": 66,
+          "ties": 44,
+          "win_rate": 0.4094,
+          "p_value": 0.0108,
+          "wilcoxon_p": 0.000326
+        }
+      },
+      {
+        "seed": 2,
+        "mean_reward_diff": -0.0227,
+        "common_n": 149,
+        "within_seed_paired": {
+          "n": 149,
+          "wins": 67,
+          "losses": 47,
+          "ties": 35,
+          "win_rate": 0.5671,
+          "p_value": 0.0747,
+          "wilcoxon_p": 0.834267
+        }
+      },
+      {
+        "seed": 3,
+        "mean_reward_diff": -0.0841,
+        "common_n": 149,
+        "within_seed_paired": {
+          "n": 149,
+          "wins": 60,
+          "losses": 55,
+          "ties": 34,
+          "win_rate": 0.5168,
+          "p_value": 0.7093,
+          "wilcoxon_p": 0.055199
+        }
+      }
+    ],
+    "across_seed": {
+      "n": 3,
+      "diffs": [
+        -0.0777,
+        -0.0227,
+        -0.0841
+      ],
+      "mean_diff": -0.0615,
+      "all_same_sign": true,
+      "direction": "B>A"
+    }
+  }
+}
