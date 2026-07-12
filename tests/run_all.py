@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.dirname(HERE))
 MODULES = ["test_render_parity", "test_reward", "test_gae",
            "test_grpo_loss", "test_masking", "test_judge", "test_env", "test_ppo_truncate",
            "test_persistence", "test_eval", "test_model", "test_seed_aggregate",
-           "test_orchestrator"]
+           "test_orchestrator", "test_sanitize_leak"]
 
 if __name__ == "__main__":
     sys.path.insert(0, HERE)

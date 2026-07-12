@@ -1,0 +1,24 @@
+{
+  "methods": [
+    "sft"
+  ],
+  "metrics": {
+    "sft": {
+      "n": 149,
+      "mean_reward": 0.4639,
+      "deal_rate": 0.9329,
+      "mean_ratio": 0.7557
+    }
+  },
+  "common_n": 149,
+  "metrics_common": {
+    "sft": {
+      "n": 149,
+      "mean_reward": 0.4639,
+      "deal_rate": 0.9329,
+      "mean_ratio": 0.7557
+    }
+  },
+  "win_rate": {},
+  "win_stats": {}
+}

@@ -77,11 +77,13 @@ def _free_gpu():
 
 
 def run(cfg, dirs, scenarios, buyer, out_dir, judge=None, include_base=True, evaluate=evaluate_adapter,
-        min_coverage=0.9, split=None, limit=None):
+        min_coverage=0.9, split=None, limit=None, sanitize_leak=False):
     """Evaluate base + each adapter on the same scenarios; below min_coverage a method exits non-zero without persisting."""
     results = {}
     n_req = len(scenarios)
     scenario_sig = _scenario_sig(scenarios)
+    # only passed when set, so injected `evaluate` stubs keep their existing signature
+    eval_kw = {"sanitize_leak": True} if sanitize_leak else {}
     targets = ([("base", None)] if include_base else []) + list(dirs.items())
     for name, adir in targets:
         out_path = os.path.join(out_dir, f"{name}_eval.json")
@@ -89,7 +91,8 @@ def run(cfg, dirs, scenarios, buyer, out_dir, judge=None, include_base=True, eva
             # reuse a cached eval only for the same request shape AND the same scenario set
             saved = json.load(open(out_path))
             if (saved.get("n_requested") == n_req and saved.get("split") == split
-                    and saved.get("limit") == limit and saved.get("scenario_sig") == scenario_sig):
+                    and saved.get("limit") == limit and saved.get("scenario_sig") == scenario_sig
+                    and bool(saved.get("sanitize_leak")) == sanitize_leak):
                 results[name] = saved.get("per_scenario", {})
                 print(f"  {name}: reusing {out_path} (resume)", flush=True)
                 continue
@@ -99,7 +102,7 @@ def run(cfg, dirs, scenarios, buyer, out_dir, judge=None, include_base=True, eva
                   f"(saved split={saved.get('split')} limit={saved.get('limit')} "
                   f"n={saved.get('n_requested')} sig={saved.get('scenario_sig')} vs "
                   f"{split}/{limit}/{n_req}/{scenario_sig}) — re-scoring.", flush=True)
-        metrics, per = evaluate(cfg, scenarios, buyer, adapter_dir=adir, judge=judge)
+        metrics, per = evaluate(cfg, scenarios, buyer, adapter_dir=adir, judge=judge, **eval_kw)
         if n_req and len(per) < min_coverage * n_req:
             print(f"  {name}: only {len(per)}/{n_req} scenarios scored (< {min_coverage:.0%} floor) — "
                   "that's an API outage, not a result. NOT persisting; exiting non-zero so the "
@@ -110,7 +113,7 @@ def run(cfg, dirs, scenarios, buyer, out_dir, judge=None, include_base=True, eva
         persistence.write_json_atomic(
             out_path, {"adapter_dir": adir, "metrics": metrics, "per_scenario": per,
                        "n_requested": n_req, "split": split, "limit": limit,
-                       "scenario_sig": scenario_sig})
+                       "scenario_sig": scenario_sig, "sanitize_leak": sanitize_leak})
         print(f"  {name}: {metrics}", flush=True)
         _free_gpu()
     comparison = compare_methods(results)
@@ -135,6 +138,10 @@ def main():
     ap.add_argument("--min-coverage", type=float, default=0.9,
                     help="abort non-zero if a method scores fewer than this fraction of the "
                          "requested scenarios (outage guard; 0 disables)")
+    ap.add_argument("--sanitize-leak", action="store_true",
+                    help="truncate generated seller text at the first chat-template continuation "
+                         "marker before the buyer/judge see it (the sanitized SFT re-eval; the "
+                         "published eval_s* results ran without it)")
     args = ap.parse_args()
 
     # max_seq_length 4096 so long multi-turn eval contexts never truncate, same for every method
@@ -155,7 +162,8 @@ def main():
     buyer = make_buyer(cfg, "grade")
     judge = make_judge(cfg)
     comparison = run(cfg, dirs, scenarios, buyer, out_dir, judge=judge, include_base=not args.no_base,
-                     min_coverage=args.min_coverage, split=args.split, limit=args.limit)
+                     min_coverage=args.min_coverage, split=args.split, limit=args.limit,
+                     sanitize_leak=args.sanitize_leak)
 
     print("\n=== COMPARISON ===", flush=True)
     # headline is over the scenarios shared by all methods; own-set metrics are in {method}_eval.json

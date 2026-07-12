@@ -1,14 +1,23 @@
 """Shared eval path for base/SFT/PPO/GRPO."""
 
+import os
+import time
+
 from .env import NegotiationEnv
 
 
 def run_eval(cfg, generate_fn, scenarios, buyer, judge=None, max_consecutive_failures=10):
     """Returns (metrics, per_scenario), per_scenario mapping id -> {reward, agreed_price, ratio,
-    deal, turns}. max_consecutive_failures stops a sustained buyer/judge outage; 0 disables."""
+    deal, turns}. max_consecutive_failures stops a sustained buyer/judge outage; 0 disables.
+    NEG_EVAL_VERBOSE=1 prints one pacing line per scenario (an unattended pod otherwise gives no
+    signal between 'Eval on N scenarios' and the final metrics, so a hang and a slow run look
+    identical from the log)."""
+    verbose = bool(os.environ.get("NEG_EVAL_VERBOSE"))
+    t_start = time.time()
     per = {}
     consecutive_failed = 0
     for i, sc in enumerate(scenarios):
+        t_sc = time.time()
         env = NegotiationEnv([sc], buyer, cfg, single_turn=False, judge=judge)
         env.reset(seed=i)
         reward, info = 0.0, {}
@@ -17,6 +26,11 @@ def run_eval(cfg, generate_fn, scenarios, buyer, judge=None, max_consecutive_fai
             _obs, reward, terminated, truncated, info = env.step(seller_text)
             if terminated or truncated:
                 break
+        if verbose:
+            dropped = "DROP" if (info.get("buyer_failed") or info.get("judge_failed")) else "ok"
+            print(f"  [{i + 1}/{len(scenarios)}] {sc['id']} {dropped} "
+                  f"{time.time() - t_sc:.0f}s (elapsed {(time.time() - t_start) / 60:.1f}m)",
+                  flush=True)
         if info.get("buyer_failed") or info.get("judge_failed"):
             # omit the scenario rather than score a fabricated no-deal
             consecutive_failed += 1
@@ -155,10 +169,13 @@ def compare_methods(results, common_exclude=("base",)):
     }
 
 
-def make_greedy_generate_fn(model, tokenizer, cfg):
-    """Wrap a loaded policy as generate_fn(system, obs) -> seller_text, greedy."""
+def make_greedy_generate_fn(model, tokenizer, cfg, sanitize_leak=False):
+    """Wrap a loaded policy as generate_fn(system, obs) -> seller_text, greedy. With
+    sanitize_leak, generated text is truncated at the first chat-template continuation marker
+    BEFORE anything downstream (buyer, judge, transcript) sees it; generate_fn.truncated counts
+    the turns that were cut."""
     import torch
-    from . import model as model_mod
+    from . import model as model_mod, render
 
     try:
         from unsloth import FastModel
@@ -175,12 +192,19 @@ def make_greedy_generate_fn(model, tokenizer, cfg):
             out = model.generate(**inputs, max_new_tokens=cfg.max_new_tokens, do_sample=False,
                                  repetition_penalty=1.0, pad_token_id=tokenizer.pad_token_id)
         text = tokenizer.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
-        return text.strip()
+        text = text.strip()
+        if sanitize_leak:
+            clean = render.truncate_template_leak(text)
+            if clean != text:
+                generate_fn.truncated += 1
+            text = clean
+        return text
 
+    generate_fn.truncated = 0
     return generate_fn
 
 
-def evaluate_adapter(cfg, scenarios, buyer, adapter_dir=None, judge=None):
+def evaluate_adapter(cfg, scenarios, buyer, adapter_dir=None, judge=None, sanitize_leak=False):
     """Load base (+ LoRA adapter if given; None = baseline) and run the eval. Needs GPU."""
     from . import model as model_mod
     from .judge import make_judge
@@ -189,5 +213,8 @@ def evaluate_adapter(cfg, scenarios, buyer, adapter_dir=None, judge=None):
     if adapter_dir:
         from peft import PeftModel
         model = PeftModel.from_pretrained(model, adapter_dir)
-    generate_fn = make_greedy_generate_fn(model, tokenizer, cfg)
-    return run_eval(cfg, generate_fn, scenarios, buyer, judge=judge or make_judge(cfg))
+    generate_fn = make_greedy_generate_fn(model, tokenizer, cfg, sanitize_leak=sanitize_leak)
+    metrics, per = run_eval(cfg, generate_fn, scenarios, buyer, judge=judge or make_judge(cfg))
+    if sanitize_leak:
+        metrics["truncated_seller_turns"] = generate_fn.truncated
+    return metrics, per

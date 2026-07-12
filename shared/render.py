@@ -28,6 +28,32 @@ def sanitize_utterance(text):
     return _WS_RUN_RE.sub(" ", text).strip()
 
 
+# The SFT policy fails to stop at its turn boundary and streams a fake continuation of the
+# dialogue ("user ... assistant <think> ...") that the buyer then reads and sometimes prices
+# from (see results/eval_s*/sft_eval.json — every SFT episode carries it). These are the
+# markers that continuation starts with; nothing before the first one is template text.
+_LEAK_PATTERNS = [
+    re.compile(r"<\|im_(?:start|end)\|>"),
+    re.compile(r"</?think>", flags=re.IGNORECASE),
+    re.compile(r"(?<![A-Za-z])(?:user|assistant)(?![A-Za-z])"),
+    re.compile(re.escape(TRANSCRIPT_HEADER)),
+]
+
+
+def truncate_template_leak(text):
+    """Cut generated text at the first chat-template continuation marker, keeping only the
+    genuine reply. Used by the sanitized eval variant (eval_methods --sanitize-leak); the
+    unsanitized path is what the published eval_s* results ran."""
+    if not text:
+        return text
+    cut = len(text)
+    for pat in _LEAK_PATTERNS:
+        m = pat.search(text)
+        if m:
+            cut = min(cut, m.start())
+    return text[:cut].strip()
+
+
 def _spk(role):
     return "Buyer" if str(role).lower().startswith("b") else "Seller"
 
