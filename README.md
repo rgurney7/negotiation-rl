@@ -1,13 +1,31 @@
 # negotiation-rl
 
-A controlled comparison of three ways to teach a 4B language model to bargain: **SFT**,
-**GRPO**, and **PPO**, all on the same CraigslistBargains seller task, the same base model, the
-same data, the same opponent, and the same reward and evaluated through one shared harness.
+Most RL environments for LLMs today are built for math and code, where a checker verifies the
+answer and the best policy is to make every output as correct as possible. Negotiation is a
+different kind of task, and an underexplored one. It is still checkable (the agreed price is a
+scalar you can score against the listing), but it is open-ended and dynamic: the model faces an
+adversarial counterparty rather than a static problem, there is no single correct move, and the
+reward arrives at the end of a conversation rather than at the end of an answer. That last part
+is what multi-turn RL is supposed to buy: a policy that can trade a weaker move now (a small
+concession to keep an impatient buyer at the table) for a better outcome later, instead of
+optimizing each reply as if it were the last.
 
-The point is not to crown a winner in the abstract. It is to hold every experimental condition
-constant so that whatever difference appears between the three is attributable to the *learning
-algorithm*, not to a confound. The repository is organized around that single idea: anything
-that must be identical across methods lives in `shared/` and is imported by all three.
+Eight turns of Craigslist haggling is a short horizon, but it is long enough for strategy to
+show up in the transcripts (anchoring, concessions, holding or folding under a pass threat) and
+short enough to run as a controlled experiment on one rented GPU. That makes it a small testbed
+for a question bigger than the task: whether current training methods produce something like
+persuasion, or just tighter answer-matching.
+
+This repo is that experiment: three ways to teach a 4B model to bargain on the
+CraigslistBargains seller task (**SFT**, **GRPO**, and **PPO**: same base model, same 817
+training dialogues, same reward, same opponent, one shared eval harness, three seeds each). It
+is the redesigned follow-up to
+[llm-negotiation-rl](https://github.com/rgurney7/llm-negotiation-rl), which asked the same
+question and failed at the finish line. Anything that must be identical across methods lives in
+`shared/` and is imported by all three.
+
+The headline table is below. The more interesting result is what the transcripts show: the
+three methods learned three different strategies, but not necessarily negotiation.
 
 ## Results
 
@@ -20,6 +38,7 @@ model family never seen in training (`gpt-5.4-nano`). Full stats in
 |---|---|---|---|
 | base (untrained) | 0.381 | 58% | 0.826 |
 | **SFT** | **0.488** (0.459–0.506) | 86% | 0.788 |
+| SFT, sanitized eval (see below) | 0.477 (0.464–0.487) | 95% | 0.758 |
 | GRPO | 0.405 (0.396–0.415) | 99% | 0.722 |
 | PPO | 0.427 (0.422–0.437) | 75% | 0.794 |
 
@@ -32,6 +51,58 @@ above are ranges, not confidence intervals.
 
 The whole run — nine training runs plus evaluation — took ~51 hours on one rented A40 and cost
 about $23.
+
+## What each method actually learned
+
+The aggregate numbers hide the part worth reading the ~1,500 eval transcripts for: each method
+has an unmistakable behavioral signature.
+
+**SFT cloned the human surface.** Terse replies (8.75 words/turn on every seed; the human demo
+median is 9), the human deal-rate/price trade-off, and one rare human phrase ("I can do $X",
+1.9% of human seller turns) amplified into a template covering ~88% of its episodes. It wins by
+not losing: its mean advantage over PPO comes from deals PPO fails to close, not from better
+prices per deal. Per closed deal, they are even.
+
+**GRPO learned an acceptance token, not a policy.** Trained on a single closing turn, two of
+three seeds collapsed onto "That works for me." emitted regardless of context, including as the
+answer to "What is the lowest you can sell the phone for?" It sometimes names a turn-1 price
+and never defends it (all nine stated-then-broken floors were conceded on the very next turn),
+and the buyer names the closing price first in ~97% of its deals. The 99% deal rate is real,
+but the reward is the buyer's opening offer passed through: a policy that works only because
+~98% of this buyer's openers already clear the reserve.
+
+**PPO learned a concession ladder.** Highest anchor (~0.93x listing), the most distinct prices
+per episode, descending "I can meet you at $X" counteroffers, slowest closes. But the steps do
+not react to the buyer (correlation with buyer movement is ~0), and when the ladder runs out of
+rungs it freezes: in ~98% of its lost deals the buyer's final offer was at or above the
+reserve, a median ~0.31 reward left on the table each time.
+
+**The untrained base reframes the comparison.** It is already the most fluent, most
+item-grounded seller, the only one that argues from the listing, and the only one that reliably
+moves the buyer up (~82% of its deals). It just fails to close (58%). Training did not teach
+language or price extraction: the base had both. It taught closing, and every method bought
+closing by discarding language. No trained method beats base on any grounding measure, and
+grounding is uncorrelated with reward within every method.
+
+One scenario shows all four signatures at once (a 2004 Volvo, $4,500 listing, buyer capped at
+$3,150): base argues the service history, sets a $3,500 floor, holds it, and moves the buyer up
+to $3,500, the only method that moved this buyer. SFT freezes at $3,900. GRPO opens "I'm open
+to $4000, but that's my absolute floor," then accepts $3,150 on its next turn. PPO repeats "I
+can meet you today at $4500." verbatim six times into a wall. (Scenario `0fbf2d4a…`, seed 1,
+in `results/eval_s1/`.)
+
+## The template leak, found and measured
+
+Every SFT eval episode leaks its chat template: after the genuine reply, the model streams a
+fake "user ... assistant" continuation of the dialogue that the live buyer reads, and in 21-33%
+of SFT's deals per seed the agreed price first appears inside that hallucination. That put
+SFT's headline number in doubt, so I re-ran the SFT eval with the leak truncated at generation
+time (`eval_methods --sanitize-leak`; results in `results/eval_sanitized_s{1,2,3}/`). Sanitized
+mean reward is 0.477 against 0.486 published, still ahead of both RL methods on every seed.
+Deal rate rose from 85% to 95% and closing prices dropped about 3 points of listing: the
+hallucinated continuations were costing SFT deals at roughly the rate their fake anchors were
+earning price. The root cause (the fine-tune eroded the stop token even though it carried loss
+in all 3,198 training examples) is still open, and blocks RL-from-SFT-init until fixed.
 
 ## What's being compared
 
@@ -110,6 +181,7 @@ tests/       offline tests (render parity, reward, gae, grpo-loss, masking, env/
 ## Run
 
 ```bash
+git clone https://github.com/rgurney7/negotiation-rl.git && cd negotiation-rl
 pip install -e .                 # Python 3.11; training needs a CUDA box
 cp .env.example .env             # GOOGLE_API_KEY (train buyer) + OPEN_AI_API_KEY (eval buyer)
 
@@ -143,7 +215,8 @@ Everything the run produced is persisted (the previous iteration of this project
 checkpoints to ephemeral compute; this one over-corrects):
 
 - **In this repo:** `results/` — aggregate stats, all per-scenario eval transcripts for every
-  method × seed, and the judge cache that makes the scoring replayable.
+  method × seed, the sanitized SFT re-eval, and the judge cache that makes the scoring
+  replayable.
 - **On Hugging Face:** per-seed adapters + training logs + rollout transcripts at
   `ShallowLearning/negotiation-{sft,grpo,ppo}-qwen3.5-4b-s{1,2,3}`, and the results mirror at
   `ShallowLearning/negotiation-results`.
